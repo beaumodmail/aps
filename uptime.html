@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uptime Monitor</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #7289da, #99aab5);
+            color: white;
+            text-align: center;
+        }
+        
+        .container {
+            padding: 20px;
+        }
+        
+        .uptime {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        
+        .status {
+            background: black;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Uptime Monitor</h1>
+        <p class="uptime">JoBots Uptime: <span id="uptime">99.99%</span></p>
+        <div class="status">Up to date with current uptime.</div>
+    </div>
+
+    <script>
+        // This script is where you would configure your uptime data
+        const uptime = "99.99%"; // Example uptime value, change as needed
+
+        // Set the uptime value in the HTML
+        document.getElementById('uptime').textContent = uptime;
+    </script>
+</body>
+</html>
