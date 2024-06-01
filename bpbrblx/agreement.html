@@ -123,4 +123,40 @@
             <p>7.2 This Agreement shall be governed by and construed in accordance with the laws of the State of <strong>[State]</strong>, without regard to conflicts of law principles.</p>
             <p>7.3 Any amendments or modifications to this Agreement must be made in writing and signed by both parties.</p>
             <p>7.4 If any provision of this Agreement is found to be unenforceable or invalid, such provision shall be limited or eliminated to the minimum extent necessary so that this Agreement shall otherwise remain in full force and effect and enforceable.</p>
-            <p>7.5 This Agreement constitutes the entire
+            <p>7.5 This Agreement constitutes the entire agreement between the parties with respect to the subject matter hereof and supersedes all prior or contemporaneous oral or written agreements concerning such subject matter.</p>
+        </div>
+
+        <div class="signature-section">
+            <div class="signature">
+                <label for="disclosing-party-signature">Disclosing Party</label>
+                <input type="text" id="disclosing-party-signature" placeholder="Signature">
+                <input type="text" placeholder="Name">
+                <input type="text" placeholder="Title">
+                <input type="date">
+            </div>
+            <div class="signature">
+                <label for="receiving-party-signature">Receiving Party</label>
+                <input type="text" id="receiving-party-signature" placeholder="Signature">
+                <input type="text" placeholder="Name">
+                <input type="text" placeholder="Title">
+                <input type="date">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById('password').value;
+            const content = document.getElementById('content');
+            const errorMessage = document.getElementById('error-message');
+
+            if (password === '12345') {
+                content.style.display = 'block';
+                document.querySelector('.password-container').style.display = 'none';
+            } else {
+                errorMessage.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
