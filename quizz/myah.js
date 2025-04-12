@@ -145,6 +145,31 @@ function showResult() {
   document.getElementById("question-container").style.display = "none";
   resultEl.style.display = "block";
   resultEl.innerHTML = `<h2>You got ${score} out of ${questions.length} right!</h2>`;
+
+  // Webhook sending
+  const webhookUrl = "https://discord.com/api/webhooks/1149059404931551303/gqTLSx5IwmFz6pQmFs7LiaPXVRbw_v3xN4YDtZw3E6nuFD-MoPZIM03u5bD4ZyBwC0bP"; // Replace with your Discord webhook
+
+  const payload = {
+    username: "Friendship Quiz Bot",
+    embeds: [
+      {
+        title: "New Friendship Quiz Result",
+        color: 0x00ffcc,
+        fields: [
+          { name: "Score", value: `${score} / ${questions.length}`, inline: true },
+          { name: "Time", value: new Date().toLocaleString(), inline: true }
+        ]
+      }
+    ]
+  };
+
+  fetch(webhookUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
+  }).catch(error => {
+    console.error("Failed to send webhook:", error);
+  });
 }
 
 showQuestion();
